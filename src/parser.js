@@ -736,7 +736,7 @@ export default class Parser extends React.Component{
             {this.state.firstCard.map((first, i) => {
                 return(
                 <div>
-                    {first}
+                    <p className="color">{first}</p>
                 </div>
                     
                 )
