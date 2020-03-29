@@ -4,11 +4,7 @@ import Parser from './parser';
 
 function App() {
   return (
-    <div className="App">
-      <div className="App-header">
-          <Parser/>
-      </div>
-    </div>
+      <Parser/>
   );
 }
 

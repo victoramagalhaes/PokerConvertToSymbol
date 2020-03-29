@@ -706,12 +706,12 @@ export default class Parser extends React.Component{
                 }
         }
         for(let j = 0; j < FirstHandConverted.length; j++){
-            if(FirstHandConverted[j] != undefined && SecondHandConverted[j] != undefined && ThirdHandConverted[j] != undefined){
+            if(FirstHandConverted[j] !== undefined && SecondHandConverted[j] !== undefined && ThirdHandConverted[j] !== undefined){
                 firstConverted[j] = [FirstHandConverted[j]];
                 secondConverted[j] = [SecondHandConverted[j]];
                 thirdConverted[j] = [ThirdHandConverted[j]];
             }
-            if(FirstColor[j] != undefined && SecondColor[j] != undefined && ThirdColor[j] != undefined){
+            if(FirstColor[j] !== undefined && SecondColor[j] !== undefined && ThirdColor[j] !== undefined){
                 FirstColorConverted[j] = [FirstColor[j]];
                 SecondColorConverted[j] = [SecondColor[j]];
                 ThirdColorConverted[j] = [ThirdColor[j]];
@@ -729,21 +729,26 @@ export default class Parser extends React.Component{
     render(){
         console.log(this.state.firstCard, this.state.secondCard, this.state.thirdCard, this.state.firstColor, this.state.secondColor, this.state.thirdColor)
         return(
-            <div>
-            <textarea name="flop" value={this.state.flop} onChange={this.handleChange}></textarea>
-            <button onClick={this.convertToSymbol}></button>
-
-            {this.state.firstCard.map((first, i) => {
-                return(
-                <div>
-                    <p className="color">{first}</p>
+            <div className="container">
+                <div className="row justify-content-center">
+                <div className="col-md-6 flex-column">
+                    <div className="d-flex flex-column">
+                        <textarea style={{height: '250px', marginTop:'50px', marginBottom:'5px'}} name="flop" value={this.state.flop} onChange={this.handleChange}></textarea>
+                        <button type="button" class="btn btn-dark" onClick={this.convertToSymbol}> Converter </button>
+                    </div>
                 </div>
-                    
-                )
-                
-            })}
-
-
+                </div>
+                <div className="row justify-content-center">
+                    <div className="col-md-12">
+                    {this.state.firstCard.map((first, i) => {
+                        return(
+                        <div className="d-flex flex-row">
+                            <p className="color">{first}</p>
+                        </div>
+                        ) 
+                    })}
+                    </div>
+                </div>
             </div>
         );
     }
