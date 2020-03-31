@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(26, 26, 26);
+  background-color: rgb(252, 252, 252);
 }
 
 code {
@@ -13,6 +13,21 @@ code {
     monospace;
 }
 
-.color{
-  color:Red;
+.black{
+  color:black;
+}
+.blue{
+  color:rgb(34, 109, 207);
+}
+.green{
+  color: rgb(18, 151, 18);
+}
+.red{
+  color:red;
+}
+.sizeCards{
+  font-size:100px;
+}
+p{
+  margin-bottom:0px !important;
 }

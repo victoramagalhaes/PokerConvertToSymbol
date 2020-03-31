@@ -7,12 +7,6 @@ export default class Parser extends React.Component{
         this.state = {
             flop: '',
             flopCollection: [],
-            firstCard:[],
-            secondCard:[],
-            thirdCard:[],
-            firstColor:[],
-            secondColor:[],
-            thirdColor:[]
         }
         this.handleChange = this.handleChange.bind(this);
         this.convertToSymbol = this.convertToSymbol.bind(this);
@@ -32,9 +26,8 @@ export default class Parser extends React.Component{
             // flopCollection[3] = flop.slice(21,27)
             flopCollection[i] = flop.slice(i, i + 6);
         }
-        console.log(flopCollection);
+        // console.log(flopCollection);
 
-        let flopConverted = [];
         let FirstHandSelected = [];
         let SecondHandSelected = [];
         let ThirdHandSelected = [];
@@ -42,15 +35,9 @@ export default class Parser extends React.Component{
         let SecondHandConverted = [];
         let ThirdHandConverted = [];
         let flopConvertedList = [];
-        let firstConverted = [];
-        let secondConverted = [];
-        let thirdConverted = [];
         let FirstColor = [];
         let SecondColor = [];
         let ThirdColor = [];
-        let FirstColorConverted = [];
-        let SecondColorConverted = [];
-        let ThirdColorConverted = [];
 
         // Verify every hand separately
         for(let i = 0; i < flopCollection.length; i+=7){
@@ -706,44 +693,56 @@ export default class Parser extends React.Component{
                 }
         }
         for(let j = 0; j < FirstHandConverted.length; j++){
-            if(FirstHandConverted[j] !== undefined && SecondHandConverted[j] !== undefined && ThirdHandConverted[j] !== undefined){
-                firstConverted[j] = [FirstHandConverted[j]];
-                secondConverted[j] = [SecondHandConverted[j]];
-                thirdConverted[j] = [ThirdHandConverted[j]];
-            }
-            if(FirstColor[j] !== undefined && SecondColor[j] !== undefined && ThirdColor[j] !== undefined){
-                FirstColorConverted[j] = [FirstColor[j]];
-                SecondColorConverted[j] = [SecondColor[j]];
-                ThirdColorConverted[j] = [ThirdColor[j]];
-            }
+            if(
+                FirstHandConverted[j] !== undefined && SecondHandConverted[j] !== undefined && ThirdHandConverted[j] !== undefined &&
+                FirstColor[j] !== undefined && SecondColor[j] !== undefined && ThirdColor[j] !== undefined
+            ){
+                flopConvertedList[j] = {
+                    'first': FirstHandConverted[j], 
+                    'second': SecondHandConverted[j], 
+                    'third': ThirdHandConverted[j], 
+                    'firstColor': FirstColor[j], 
+                    'secondColor': SecondColor[j], 
+                    'thirdColor': ThirdColor[j]};
+                }
         }
         this.setState({ 
-            firstCard : firstConverted, 
-            secondCard: secondConverted, 
-            thirdCard: thirdConverted,
-            firstColor: FirstColorConverted,
-            secondColor: SecondColorConverted,
-            thirdColor: ThirdColorConverted
+            flopCollection: flopConvertedList
         });
     }
     render(){
-        console.log(this.state.firstCard, this.state.secondCard, this.state.thirdCard, this.state.firstColor, this.state.secondColor, this.state.thirdColor)
+        console.log(this.state.flop)
         return(
             <div className="container">
                 <div className="row justify-content-center">
-                <div className="col-md-6 flex-column">
-                    <div className="d-flex flex-column">
-                        <textarea style={{height: '250px', marginTop:'50px', marginBottom:'5px'}} name="flop" value={this.state.flop} onChange={this.handleChange}></textarea>
-                        <button type="button" class="btn btn-dark" onClick={this.convertToSymbol}> Converter </button>
+                <div className="col-md-6">
+                    <div className="d-flex">
+                        <textarea 
+                        style={{height: '250px', width:'100%', marginTop:'50px', marginBottom:'5px'}} 
+                        name="flop" 
+                        value={this.state.flop} 
+                        onChange={this.handleChange}
+                        placeholder="Insert a flop or a flop set (with space), ex: As8s6s JdTs9d JsJh3c"
+                        >
+                        </textarea>
                     </div>
                 </div>
                 </div>
                 <div className="row justify-content-center">
-                    <div className="col-md-12">
-                    {this.state.firstCard.map((first, i) => {
+                    <div className="col-md-6">
+                        <button style={{width:'30%'}} type="button" className="btn btn-dark" onClick={this.convertToSymbol}> Convert </button>
+                        <button style={{width:'30%', marginLeft:'5%'}} type="button" className="btn btn-dark" onClick={this.convertToSymbol}> Copy </button>
+                        <button style={{width:'30%', marginLeft:'5%'}} type="button" className="btn btn-dark" onClick={this.convertToSymbol}> Refresh </button>
+                    </div>
+                </div>
+                <div className="row justify-content-center">
+                    <div className="col-md-6">
+                    {this.state.flopCollection.map((flop, i) => {
                         return(
-                        <div className="d-flex flex-row">
-                            <p className="color">{first}</p>
+                        <div key={i} className="d-flex flex-row sizeCards justify-content-center">
+                            <p className={flop.firstColor}>{flop.first}</p>
+                            <p className={flop.secondColor}>{flop.second}</p>
+                            <p className={flop.thirdColor}>{flop.third}</p>
                         </div>
                         ) 
                     })}
