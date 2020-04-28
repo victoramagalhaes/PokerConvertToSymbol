@@ -725,6 +725,40 @@ export default class Parser extends React.Component{
     }
     render(){
         return(
+            <div>
+            <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+                <a className="navbar-brand abs">PokerConvertToSymbol</a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="navbar-collapse collapse" id="collapsingNavbar">
+                    <ul className="navbar-nav">
+                        {/* <li className="nav-item active">
+                            <a className="nav-link" href="#">Link</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="//codeply.com">Codeply</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#myAlert" data-toggle="collapse">Link</a>
+                        </li> */}
+                    </ul>
+                    <ul className="navbar-nav ml-auto">
+                        <li className="nav-item">
+                            <a href="https://github.com/victoramagalhaes/PokerConvertToSymbol" className="nav-link">
+                            <i style={{marginRight:'6px'}} className="fab fa-github"></i>
+                                How to use
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a href="mailto:victor@divweb.com.br" className="nav-link">
+                            <i style={{marginRight:'6px'}} className="fas fa-envelope"></i>
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
             <div className="container">
                 <div className="row justify-content-center">
                 <div className="col-md-6">
@@ -734,7 +768,7 @@ export default class Parser extends React.Component{
                         name="flop" 
                         value={this.state.flop} 
                         onChange={this.handleChange}
-                        placeholder="Insert a flop or a flop set (with space), ex: As8s6s JdTs9d JsJh3c"
+                        placeholder="Insert a flop or a flop set (with space), e.g., As8s6s JdTs9d JsJh3c"
                         >
                         </textarea>
                     </div>
@@ -762,6 +796,7 @@ export default class Parser extends React.Component{
                     </div>
                 </div>
                 </ClickToSelect>
+            </div>
             </div>
         );
     }
