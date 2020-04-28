@@ -1,4 +1,5 @@
 import React from 'react';
+import ClickToSelect from '@mapbox/react-click-to-select';
 
 export default class Parser extends React.Component{
     
@@ -7,8 +8,8 @@ export default class Parser extends React.Component{
         this.state = {
             flop: '',
             flopCollection: [],
+            copy:'Copy'
         }
-        this.flopRef = React.createRef();
         this.handleChange = this.handleChange.bind(this);
         this.convertToSymbol = this.convertToSymbol.bind(this);
         this.CopyToClipboard = this.CopyToClipboard.bind(this);
@@ -18,10 +19,15 @@ export default class Parser extends React.Component{
             flop:e.target.value
         })
     }
+    handleClick(e){
+        this.divRef.click();
+        this.setState({ copy:'Copied!'  })
+    }
+    Refresh(){
+        window.location.reload();
+    }
     CopyToClipboard(){
-        const getFlop = this.flopRef.current;
         document.execCommand('copy');
-
     }
     convertToSymbol(){
         let flop = this.state.flop;
@@ -737,23 +743,25 @@ export default class Parser extends React.Component{
                 <div className="row justify-content-center">
                     <div className="col-md-6">
                         <button style={{width:'30%'}} type="button" className="btn btn-dark" onClick={this.convertToSymbol}> Convert </button>
-                        <button style={{width:'30%', marginLeft:'5%'}} type="button" className="btn btn-dark" onClick={this.CopyToClipboard}> Copy </button>
-                        <button style={{width:'30%', marginLeft:'5%'}} type="button" className="btn btn-dark" onClick={this.convertToSymbol}> Refresh </button>
+                        <button style={{width:'30%', marginLeft:'5%'}} type="button" className="btn btn-dark" onClick={this.handleClick.bind(this)}> {this.state.copy} </button>
+                        <button style={{width:'30%', marginLeft:'5%'}} type="button" className="btn btn-dark" onClick={this.Refresh}> Refresh </button>
                     </div>
                 </div>
-                <div className="row justify-content-center">
+                <ClickToSelect onSelect={this.CopyToClipboard}>
+                <div ref={divRef => this.divRef = divRef} className="row justify-content-center">
                     <div className="col-md-6">
                     {this.state.flopCollection.map((flop, i) => {
                         return(
-                        <div ref={this.flopRef} key={i} className="d-flex flex-row sizeCards justify-content-center">
-                            <p className={flop.firstColor}>{flop.first}</p>
-                            <p className={flop.secondColor}>{flop.second}</p>
-                            <p className={flop.thirdColor}>{flop.third}</p>
+                        <div key={i} className="d-flex flex-row sizeCards justify-content-center">
+                            <span className={flop.firstColor}>{flop.first}</span>
+                            <span className={flop.secondColor}>{flop.second}</span>
+                            <span className={flop.thirdColor}>{flop.third}</span>
                         </div>
                         ) 
                     })}
                     </div>
                 </div>
+                </ClickToSelect>
             </div>
         );
     }
