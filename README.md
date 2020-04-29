@@ -5,3 +5,8 @@ PokerConvertToSymbol is a simple Flop converter, it helps to give a more beautif
 ## How does it work?
 The most useful practice is copy a flop set from an agreggation report and paste to convert all the flops.
 PokerConvertToSymbol will convert basic text on unicode symbols.
+
+
+![](https://media.giphy.com/media/XzjlIgHIgDJ3b1ab5R/giphy.gif)
+
+![](https://media.giphy.com/media/hogQhyXdUSvVOhWI6s/giphy.gif)
